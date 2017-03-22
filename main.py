@@ -45,5 +45,4 @@ The exact content of the pages is explained in the high level design document.
 #Main function. First thing that is called.
 if __name__ == '__main__':
     get_api_token()
-    print_groups()
-    #menu()
+    #print_groups()
