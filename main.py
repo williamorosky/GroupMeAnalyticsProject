@@ -17,15 +17,11 @@ def get_api_token():
         print "Invalid API Key!"
         get_api_token()
 
-def display_menu():
-    if menu.chose_group():
-        menu.group()
-    else :
-        menu.get_person()
 
 #Main function. First thing that is called.
 if __name__ == '__main__':
     print('If you have not done so already, go to the following website to receive your API token: ' +
           'https://dev.groupme.com/. When signing up, it does not matter what you put for the callback URL')
     get_api_token()
-    display_menu()
+    menu.api_token = api_token
+    menu.display_menu()
