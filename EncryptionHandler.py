@@ -1,7 +1,6 @@
 import os
 from random import randint
 
-
 def encrypt(token):
 	shift= token[0]
 	token_shift = map(lambda x: x+int(shift),map(ord,token[1:]))
