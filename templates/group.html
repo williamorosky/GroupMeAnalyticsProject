@@ -1,0 +1,81 @@
+<!doctype html>
+<head>
+	<title>Hello from Flask</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/static/group.css">
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="http://kozea.github.com/pygal.js/javascripts/svg.jquery.js"></script>
+	<script type="text/javascript" src="http://kozea.github.com/pygal.js/javascripts/pygal-tooltips.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>{{ group['name'] }}</h1>
+			</div>
+		</div>
+		{% for chart in charts %}
+		<div class="row">
+			<div class="col-md-12">
+				<iframe id="igraph" style='border:none' src="{{ chart }}" height=480 width="100%"></iframe>
+			</div>
+		</div>
+		<hr>
+		{% endfor %}
+		{% for chart in range(((smallcharts|length)/2)|round(1, 'floor')|int) %}
+		<div class="row">
+			<div class="col-md-6">
+				<iframe id="igraph" style='border:none' src="{{ smallcharts[2 * chart] }}" height=480 width="100%"></iframe>
+			</div>
+			<div class="col-md-6">
+				<iframe id="igraph" style='border:none' src="{{ smallcharts[2 * chart + 1] }}/800/460" height=480 width="100%"></iframe>
+			</div>
+		</div>
+		<hr>
+		{% endfor %}
+		{% if (smallcharts|length) % 2 == 1 %}
+			<div class="row">
+				<div class="col-md-6">
+					<iframe id="igraph" style='border:none' src="{{ smallcharts[-1] }}/800/600" height=640 width="100%"></iframe>
+				</div>
+			</div>
+			<hr>
+		{% endif %}
+		{% for bigchart in bigcharts %}
+			<div class="row">
+				<div class="col-md-12">
+					<iframe id="igraph" style='border:none' src="{{ bigchart }}/800/600" height="640" width="100%"></iframe>
+				</div>
+			</div>
+			<hr>
+		{% endfor %}
+		<!-- <div class="row">
+			<div class="col-md-12 overflow">
+				<table class="table">
+					<tr>
+						<td></td>
+						{% for member in members %}
+						<td class="data-cell">
+							<img class="group-avatar" src="{{ member[0] if member[0] else 'https://i.groupme.com/300x300.png.e8ec5793a332457096bc9707ffc9ac37.avatar' }}" title="{{ member[1] }}">
+						</td>	
+						{% endfor %}
+					</tr>
+					{% for index, row in array %}
+					<tr>
+						<td class="data-cell"><img class="group-avatar" src="{{ members[index][0] if members[index][0] else 'https://i.groupme.com/300x300.png.e8ec5793a332457096bc9707ffc9ac37.avatar' }}" title="{{ members[index][1] }}"></td>
+						{% for value in row %}
+							<td class="data-cell">{{ value }}</td>
+						{% endfor %}
+					</tr>
+					{% endfor %}
+				</table>
+			</div>
+		</div> -->
+		<!-- <div class="row">
+			<div class="col-md-12">
+				<button class="btn btn-primary" id="delete">Delete</button>
+			</div>
+		</div> -->
+	</div>
+</body>
