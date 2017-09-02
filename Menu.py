@@ -17,6 +17,8 @@ def display_menu():
     else :
         get_person()
 
+# TODO: change recursion to a while
+
 def get_group_number():
     try:
         print_groups()
@@ -120,8 +122,9 @@ def print_person_options():
     'Group Specific Statistics',
     'Back' ]
     print("Which statistic would you like to retreive?")
-    for i in range(len(options1)):
-        print(str(i+1)+". "+"\'"+options1[i]+"\'")
+    for i, opt in enumerate(options1, 1):
+        print("{}. '{}'".format(i, opt))
+            #str(i+1)+". "+"\'"+options1[i]+"\'")
 
 def print_person_options_more():
     options1=[
@@ -137,8 +140,8 @@ def print_person_options_more():
     ]
     print("More options")
     print("Which statistic would you like to receive?")
-    for i in range(len(options1)):
-        print(str(i+1)+". "+"\'"+options1[i]+"\'")
+    for i, opt in enumerate(options1, 1):
+        print("{}. '{}'".format(i, opt))
 
 def print_group_options():
     options1=[
@@ -154,8 +157,8 @@ def print_group_options():
     ]
     print_group_name()
     print("Which statistic would you like to retreive?")
-    for i in range(len(options1)):
-        print(str(i+1)+". "+"\'"+options1[i]+"\'")
+    for i, opt in enumerate(options1, 1):
+        print("{}. '{}'".format(i, opt))
 
 def print_group_options_more():
     options1=[
@@ -178,8 +181,8 @@ def print_group_options_more():
     ]
     print("More options for " + data['response'][group_number]['name'])
     print("Which statistic would you like to retreive?")
-    for i in range(len(options1)):
-        print(str(i+1)+". "+"\'"+options1[i]+"\'")
+    for i, opt in enumerate(options1, 1):
+        print("{}. '{}'".format(i, opt))
 """ get_group_number retrieves the group number. It uses recursion to prompt user
 to input until a valid input is given.
 """
@@ -192,13 +195,13 @@ def print_person_or_group():
 #Prints all of a user's groupme groups
 def print_groups():
 
-    if len(data['response']) == 0:
+    if not data['response']:
         print("You are not part of any groups.")
         return
     print("Here are your ten most recent groups:")
-    for i in range(len(data['response'])):
-        group = data['response'][i]['name']
-        print(str(i)+". "+"\'"+group+"\'")
+    for i, dat in enumerate(data['response']):
+        group = dat['name']
+        print("{}. '{}'".format(i, group))
     print("10. Back")
     global groups_data
     groups_data = data
